@@ -1,0 +1,32 @@
+{
+  "name": "hdlbits-companion",
+  "displayName": "HDLBits Companion",
+  "description": "Browse HDLBits exercises and work on Verilog solutions in VS Code.",
+  "version": "0.1.2",
+  "publisher": "local-hdlbits-companion",
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["Other", "Programming Languages"],
+  "activationEvents": ["onView:hdlbitsProblems", "onCommand:hdlbits.refreshProblems", "onCommand:hdlbits.openProgress"],
+  "main": "./extension.js",
+  "contributes": {
+    "views": { "explorer": [{ "id": "hdlbitsProblems", "name": "HDLBits" }] },
+    "commands": [
+      { "command": "hdlbits.refreshProblems", "title": "HDLBits: Refresh Problem Catalogue" },
+      { "command": "hdlbits.openProblem", "title": "HDLBits: View Problem Statement" },
+      { "command": "hdlbits.startSolution", "title": "HDLBits: Open Starter in Editor" },
+      { "command": "hdlbits.submitSolution", "title": "HDLBits: Submit Current File on HDLBits" },
+      { "command": "hdlbits.openProgress", "title": "HDLBits: Open My Account Progress" },
+      { "command": "hdlbits.openLogin", "title": "HDLBits: Open Official Sign In" }
+    ],
+    "menus": {
+      "view/item/context": [
+        { "command": "hdlbits.openProblem", "when": "view == hdlbitsProblems && viewItem == problem", "group": "inline@1" },
+        { "command": "hdlbits.startSolution", "when": "view == hdlbitsProblems && viewItem == problem", "group": "inline@2" }
+      ],
+      "view/title": [{ "command": "hdlbits.refreshProblems", "when": "view == hdlbitsProblems", "group": "navigation" }, { "command": "hdlbits.openProgress", "when": "view == hdlbitsProblems", "group": "navigation" }],
+      "editor/title": [{ "command": "hdlbits.submitSolution", "when": "resourceExtname == .v", "group": "navigation" }]
+    },
+    "configuration": { "title": "HDLBits Companion", "properties": { "hdlbits.catalogueUrl": { "type": "string", "default": "https://hdlbits.01xz.net/wiki/Problem_sets", "description": "Official HDLBits problem catalogue URL." } } }
+  },
+  "license": "SEE LICENSE IN LICENSE"
+}
